@@ -1,0 +1,55 @@
+FROM debian:stretch
+
+# required package installation(s)
+RUN apt-get update \
+    apt-get -y install openssh-server ssh software-properties-common openjdk-8-jre wget dos2unix
+
+# SSH Authorization Setup
+RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+# create directory structure for hadoop
+RUN su root \
+    mkdir -p /usr/local/hadoop/logs \
+    mkdir -p /usr/local/hdfs/datanode \
+    mkdir -p /usr/local/hdfs/namenode \
+    mkdir -p /usr/local/yarn/logs
+
+# Download and decompress hadoop 3.3.   NOTE: Documentation is excluded.
+RUN wget -c -O /root/hadoop.tar.gz https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz \
+    tar -xvf /root/hadoop.tar.gz --directory=/usr/local/hadoop --strip 1 --exclude=hadoop-3.3.0/share/doc
+
+# Setting up environment variables
+ENV HADOOP_HOME=/usr/local/hadoop
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/hadoop/bin:/usr/local/hadoop/sbin
+ENV HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
+ENV HDFS_NAMENODE_USER="root"
+ENV HDFS_DATANODE_USER="root"
+ENV HDFS_SECONDARYNAMENODE_USER="root"
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+ENV HADOOP_MAPRED_HOME=/usr/local/hadoop
+ENV HADOOP_COMMON_HOME=/usr/local/hadoop
+ENV HADOOP_HDFS_HOME=/usr/local/hadoop
+ENV YARN_HOME=/usr/local/hadoop
+ENV YARN_RESOURCEMANAGER_USER="root"
+ENV YARN_NODEMANAGER_USER="root"
+ENV HADOOP_LOG_DIR=/usr/local/hadoop/logs
+ENV HADOOP_COMMON_LIB_NATIVE_DIR=/usr/local/hadoop/lib/native
+ENV HADOOP_OPTS="-Djava.library.path=/usr/local/hadoop/lib/native"
+
+# Inject Hadoop configurations
+ADD /conf/ssh_config /root/.ssh/config
+ADD /conf/core-site.xml /usr/local/hadoop/etc/hadoop/core-site.xml
+ADD /conf/mapred-site.xml /usr/local/hadoop/etc/hadoop/mapred-site.xml
+ADD /conf/hdfs-site.xml /usr/local/hadoop/etc/hadoop/hdfs-site.xml
+ADD /conf/masters /usr/local/hadoop/etc/hadoop/masters
+ADD /conf/workers /usr/local/hadoop/etc/hadoop/workers
+ADD /conf/env.sh /root/env.sh
+RUN /root/env.sh
+
+# Convert configuration files because Windows
+RUN dos2unix ./root/.ssh/config
+RUN dos2unix ./usr/local/hadoop/etc/hadoop/*
+
+# Start SSH
+CMD [ "sh", "-c", "service ssh start; bash"]

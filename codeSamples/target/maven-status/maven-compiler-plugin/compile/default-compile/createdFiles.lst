@@ -1,0 +1,9 @@
+com/price/MaxPriceMapper.class
+com/price/MaxPrice.class
+com/price/MaxPriceReducer.class
+com/dictionary/Dictionary.class
+com/wc/WordCount.class
+com/wc/WordCount$IntSumReducer.class
+com/dictionary/AllTranslationsReducer.class
+com/dictionary/WordMapper.class
+com/wc/WordCount$TokenizerMapper.class
