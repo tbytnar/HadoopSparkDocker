@@ -3,6 +3,6 @@
 <configuration>
     <property>
         <name>mapreduce.job.tracker</name>
-        <value>master:5431</value>
+        <value>hadoopmaster:5431</value>
     </property>
 </configuration>

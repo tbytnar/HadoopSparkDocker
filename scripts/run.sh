@@ -21,8 +21,8 @@ docker network rm hadoopNetwork && docker network create -d bridge   --subnet 17
 #Create base hadoop image named "base-hadoop:1.0"
 docker build -t base-hadoop:1.0 .
 
-#run base-hadoop:1.0 image  as master container
-docker run -itd  --network="hadoopNetwork"  --ip 172.25.0.100  -p 50070:50070  -p 8088:8088 --name master --hostname master  base-hadoop:1.0
+#run base-hadoop:1.0 image  as hadoopmaster container
+docker run -itd  --network="hadoopNetwork"  --ip 172.25.0.100  -p 50070:50070  -p 8088:8088 --name hadoopmaster --hostname hadoopmaster  base-hadoop:1.0
 
 
 for (( c=1; c<=$workerCount; c++ ))
@@ -33,5 +33,5 @@ do
 done
 
 #run hadoop commands
-docker exec -ti master bash  -c "hadoop namenode -format && /usr/local/hadoop/sbin/start-dfs.sh && /usr/local/hadoop/sbin/start-yarn.sh"
-docker exec -ti master bash
+docker exec -ti hadoopmaster bash  -c "hadoop namenode -format && /usr/local/hadoop/sbin/start-dfs.sh && /usr/local/hadoop/sbin/start-yarn.sh"
+docker exec -ti hadoopmaster bash
