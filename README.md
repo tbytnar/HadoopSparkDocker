@@ -1,7 +1,5 @@
 # HadoopSparkDocker
 
-
-
 ## Environment Details
 Built With:
 - Windows 10 Profesional
@@ -10,9 +8,24 @@ Built With:
 - Ubuntu 20.04.1. LTS (WSL2)
 
 Containers:
-- Master
-- Worker[n] - Depends on WorkerCount argument in run scripts
-
-
+- hadoopmaster
+    - Hadoop 3.3.0
+    - YARN
+    - Hive
+- hadoopworker[n] - Depends on WorkerCount argument in run scripts
+    - Hadoop 3.3.0
 
 ## How to use this environment
+Clone this repository to your machine.
+
+On Windows:
+- Launch Powershell as Administrator
+- Execute scripts/run.ps1 like so:
+    - ./run.ps1 -workernodes 2 
+    - This will provision the hadoop environment with 1 master node and 2 worker nodes
+
+On Linux/Mac:
+- Launch terminal
+- Execute scripts/run.sh like so:
+    - ./run.sh 2 
+    - This will provision the hadoop environment with 1 master node and 2 worker nodes
