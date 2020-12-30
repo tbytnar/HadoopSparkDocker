@@ -15,8 +15,11 @@ ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M -
 ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip
 
 # Add additional repo's for apt to use
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.3/main > /etc/apk/repositories; 
-RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.3/community >> /etc/apk/repositories
+RUN echo http://mirror.yandex.ru/mirrors/alpine/v3.3/main >> /etc/apk/repositories && \
+    echo http://mirror.yandex.ru/mirrors/alpine/v3.3/community >> /etc/apk/repositories
+
+# Update commands
+RUN apk --update add wget tar bash coreutils procps openssl
 
 # Install Scala
 RUN apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \

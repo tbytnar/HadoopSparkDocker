@@ -21,7 +21,7 @@ Clone this repository to your machine.
 On Windows:
 - Launch Powershell as Administrator
 - Execute scripts/run.ps1 like so:
-    - ./run.ps1 -workernodes 2 
+    - ./run.ps1 -WorkerCount 2 
     - This will provision the hadoop environment with 1 master node and 2 worker nodes
     - Docker will automatically attach a console to the hadoopmaster container
 - Explore the /examples/ directory for some sample work
