@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  hadoopworker1:
+    build: ./hadoop/.
+    image: tbytnar/hadoopbase:latest
+    hostname: 'hadoopworker1'
+    container_name: hadoopworker1
+    command: bash -c "service ssh start && bash"
+    tty: true
+  hadoopworker2:
+    image: tbytnar/hadoopbase:latest
+    hostname: 'hadoopwoker2'
+    container_name: hadoopworker2
+    command: bash -c "service ssh start && bash"
+    tty: true
+  hadoopmaster:
+    image: tbytnar/hadoopbase:latest
+    ports: 
+      - "9870:9870"
+      - "8088:8088"
+    hostname: 'hadoopmaster'
+    container_name: hadoopmaster
+    command: >
+      bash -c "service ssh start
+      && hadoop namenode -format 
+      && /usr/local/hadoop/sbin/start-dfs.sh 
+      && /usr/local/hadoop/sbin/start-yarn.sh
+      && /root/startup.sh
+      && bash"
+    tty: true

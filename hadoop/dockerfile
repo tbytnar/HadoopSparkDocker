@@ -17,11 +17,11 @@ RUN su root && \
     mkdir -p /usr/local/hive
 
 # Download and decompress hadoop 3.3.   NOTE: Documentation is excluded.
-RUN wget -c -O /root/hadoop.tar.gz https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz && \
+RUN wget -c -O /root/hadoop.tar.gz https://apache.claz.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz && \
     tar -xvf /root/hadoop.tar.gz --directory=/usr/local/hadoop --strip 1 --exclude=hadoop-3.3.0/share/doc
 
 # Download and decompress Hive 3.1.2
-RUN wget -c -O /root/hive.tar.gz https://downloads.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz && \
+RUN wget -c -O /root/hive.tar.gz https://apache.osuosl.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz && \
     tar -xvf /root/hive.tar.gz --directory=/usr/local/hive --strip 1 
 
 # Setting up environment variables
@@ -73,4 +73,4 @@ RUN dos2unix /root/.ssh/config && \
     dos2unix /examples/*
 
 # Start SSH
-CMD [ "sh", "-c", "service ssh start; bash"]
+#CMD [ "sh", "-c", "service ssh start; bash"]

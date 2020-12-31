@@ -1,0 +1,11 @@
+FROM tbytnar/spark-base:latest
+
+ENV MASTER_CONTAINER_NAME=sparkmaster
+ENV SPARK_EXECUTOR_MEMORY=6G
+ENV SPARK_EXECUTOR_CORES=3
+
+# Copy examples python files into container
+COPY ./examples/ /home/examples/
+COPY ./resources/log4j.properties ./resources/spark-defaults.conf $SPARK_HOME/conf/
+
+WORKDIR /home/

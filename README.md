@@ -1,4 +1,29 @@
 # HadoopSparkDocker
+Getting your feet wet with Hadoop can prove challenging without getting an accidental invoice from a cloud provider.  This repository aims to fix that.
+
+## What this environment is
+The goal of this environment is provide a barebones installation of the most commonly used critical components of a clustered Hadoop environment for training or development purposes.
+
+## What this environment isnt
+This environment has NOT been developed with security standards and best practices in mind.  It has also not been optimized for performance.  There for by no means should you ever consider deploying it for production purposes.
+
+
+## How to use this environment
+Clone this repository to your machine.
+
+From Windows Powershell (run as administrator) or a Linux/Mac terminal:
+- Change directories to the cloned repository location
+- docker-compose -f spark-compose.yaml up -d
+- docker-compose -f hadoop-compose.yaml up -d
+- For HDFS or Hive:
+    - docker exec -it hadoopmaster /bin/bash
+- For Spark:
+    - docker exec -it sparkmaster /bin/bash
+
+To shutdown the environment:
+- docker-compose -f spark-compose.yaml down
+- docker-compose -f hadoop-compose.yaml down
+
 
 ## Environment details
 Built With:
@@ -10,26 +35,24 @@ Built With:
 Containers:
 - hadoopmaster
     - Hadoop 3.3.0
-    - YARN
-    - Hive
-- hadoopworker[n] - Depends on WorkerCount argument in run scripts
+    - YARN 
+    - Hive 3.1.2
+    - PostgreSQL - Hive Metastore Database
+- hadoopworker1 - Depends on WorkerCount argument in run scripts
     - Hadoop 3.3.0
-
-## How to use this environment
-Clone this repository to your machine.
-
-On Windows:
-- Launch Powershell as Administrator
-- Execute scripts/run.ps1 like so:
-    - ./run.ps1 -WorkerCount 2 
-    - This will provision the hadoop environment with 1 master node and 2 worker nodes
-    - Docker will automatically attach a console to the hadoopmaster container
-- Explore the /examples/ directory for some sample work
-
-On Linux/Mac:
-- Launch terminal
-- Execute scripts/run.sh like so:
-    - ./run.sh 2 
-    - This will provision the hadoop environment with 1 master node and 2 worker nodes
-    - Docker will automatically attach a console to the hadoopmaster container
-- Explore the /examples/ directory for some sample work
+    - YARN
+- hadoopworker2 - Depends on WorkerCount argument in run scripts
+    - Hadoop 3.3.0
+    - YARN
+- sparkmaster 
+    - Scala 2.12.10
+    - Spark 3.0.1
+- sparksubmit
+    - Scala 2.12.10
+    - Spark 3.0.1
+- sparkworker1 
+    - Scala 2.12.10
+    - Spark 3.0.1
+- sparkworker2
+    - Scala 2.12.10
+    - Spark 3.0.1
