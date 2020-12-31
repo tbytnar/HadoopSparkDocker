@@ -17,7 +17,6 @@ From Windows Powershell (run as administrator) or a Linux/Mac terminal:
     - docker-compose -f spark-compose.yaml up -d
 - For Spark execute the following:
     - docker-compose -f hadoop-compose.yaml up -d
-
 -To connect to the shell within the environments and start working:
     - For HDFS or Hive:
         - docker exec -it hadoopmaster /bin/bash
