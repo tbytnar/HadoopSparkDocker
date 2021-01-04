@@ -64,13 +64,14 @@ RUN /root/env.sh
 ADD /startup.sh /root/startup.sh
 
 # Inject Examples
-ADD /examples /examples/
+#ADD /examples /examples/
 
 # Convert configuration files because Windows
 RUN dos2unix /root/.ssh/config && \
     dos2unix /usr/local/hadoop/etc/hadoop/* && \
-    dos2unix /usr/local/hive/conf/* && \
-    dos2unix /examples/*
+    dos2unix /usr/local/hive/conf/* 
+    #&& \
+    #dos2unix /examples/*
 
 # Start SSH
 #CMD [ "sh", "-c", "service ssh start; bash"]
