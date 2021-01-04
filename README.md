@@ -50,9 +50,6 @@ Containers:
 - sparkmaster 
     - Scala 2.12.10
     - Spark 3.0.1
-- sparksubmit
-    - Scala 2.12.10
-    - Spark 3.0.1
 - sparkworker1 
     - Scala 2.12.10
     - Spark 3.0.1
