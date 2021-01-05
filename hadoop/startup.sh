@@ -20,4 +20,8 @@ cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-27.0-jre.jar $HIVE_HOME/lib/
 
 $HIVE_HOME/bin/schematool -dbType postgres -initSchema 
 
-nohup hiveserver2 &
+echo "Hive Metastore Init Completed...starting hiveserver2"
+
+hive --service hiveserver2 --hiveconf hive.root.logger=DEBUG,console > /var/log/hiveserver2.log 2>&1 &
+
+echo "Startup completed"

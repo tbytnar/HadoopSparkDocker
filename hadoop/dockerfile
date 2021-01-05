@@ -2,7 +2,7 @@ FROM debian:stretch
 
 # required package installation(s)
 RUN apt-get update && \
-    apt-get -y install openssh-server ssh software-properties-common openjdk-8-jre wget dos2unix
+    apt-get -y install openssh-server ssh software-properties-common openjdk-8-jre wget dos2unix net-tools
 
 # SSH Authorization Setup
 RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \

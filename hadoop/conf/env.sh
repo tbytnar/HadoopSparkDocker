@@ -23,6 +23,8 @@ export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop/
 echo "
 export HIVE_HOME=/usr/local/hive
 export PATH=$PATH:$HIVE_HOME/bin
+export CLASSPATH=$CLASSPATH:/usr/local/Hadoop/lib/*:.
+export CLASSPATH=$CLASSPATH:/usr/local/hive/lib/*:.
 " >> /root/.bashrc
 
 echo "

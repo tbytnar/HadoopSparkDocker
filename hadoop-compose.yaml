@@ -19,6 +19,7 @@ services:
       - "9870:9870"
       - "8088:8088"
       - "10000:10000"
+      - "10001:10001"
     hostname: 'hadoopmaster'
     container_name: hadoopmaster
     command: >

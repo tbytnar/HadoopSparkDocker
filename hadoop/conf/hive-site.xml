@@ -4644,7 +4644,7 @@
   </property>
   <property>
     <name>hive.server2.authentication</name>
-    <value>NONE</value>
+    <value>NOSASL</value>
     <description>
       Expects one of [nosasl, none, ldap, kerberos, pam, custom].
       Client authentication types.
@@ -4826,7 +4826,7 @@
   </property>
   <property>
     <name>hive.server2.enable.doAs</name>
-    <value>true</value>
+    <value>false</value>
     <description>
       Setting this property to true will have HiveServer2 execute
       Hive operations as the user making the calls to it.
