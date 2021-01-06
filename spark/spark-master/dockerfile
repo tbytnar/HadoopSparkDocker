@@ -1,4 +1,4 @@
-FROM tbytnar/spark-base:latest
+FROM tbytnar/portable-hadoop:spark-base
 
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_MASTER_WEBUI_PORT 8080

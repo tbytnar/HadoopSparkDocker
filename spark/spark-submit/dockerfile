@@ -1,4 +1,4 @@
-FROM tbytnar/spark-base:latest
+FROM tbytnar/portable-hadoop:spark-base
 
 ENV MASTER_CONTAINER_NAME=sparkmaster
 ENV SPARK_EXECUTOR_MEMORY=6G

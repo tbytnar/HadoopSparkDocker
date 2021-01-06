@@ -23,4 +23,5 @@ RUN tar -xzf spark-3.0.1-bin-hadoop3.2.tgz && \
 
 # Inject Spark configurations
 ADD /conf/env.sh /root/env.sh
+RUN dos2unix /root/env.sh
 RUN /root/env.sh

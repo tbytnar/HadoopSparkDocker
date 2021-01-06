@@ -1,8 +1,8 @@
-FROM tbytnar/spark-base:latest
+FROM tbytnar/portable-hadoop:spark-base
 
 ENV MASTER_CONTAINER_NAME=sparkmaster
-ENV CORES=3
-ENV MEMORY=6G
+ENV CORES=1
+ENV MEMORY=1G
 ENV SPARK_WORKER_WEBUI_PORT 8081
 ENV SPARK_WORKER_LOG /usr/local/spark/logs
 
