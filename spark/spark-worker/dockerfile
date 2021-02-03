@@ -1,9 +1,0 @@
-FROM tbytnar/spark-base:latest
-
-ENV MASTER_CONTAINER_NAME=sparkmaster
-ENV CORES=3
-ENV MEMORY=6G
-ENV SPARK_WORKER_WEBUI_PORT 8081
-ENV SPARK_WORKER_LOG /usr/local/spark/logs
-
-ENTRYPOINT $SPARK_HOME/bin/spark-class org.apache.spark.deploy.worker.Worker -c $CORES -m $MEMORY spark://$MASTER_CONTAINER_NAME:7077
